@@ -26,27 +26,18 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-// Route::middleware(['auth','role.admin'])->group(function () {
-//     Route::get('/user', function () {return 'list of users';});
-// });    
+Route::middleware(['auth','role.admin'])->group(function () {
+    Route::get('/user', function () {return 'list of users';});
+});    
 
-// Route::middleware(['auth','role.user','role.admin'])->group(function () {
-//     Route::get('/product', function () {return 'list of product';});
-// });    
+Route::middleware(['auth','role.user','role.admin'])->group(function () {
+    Route::get('/product', function () {return 'list of product';});
+});    
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::middleware(['role.admin'])->group(function () {
-        Route::get('/user', function () {return 'list of users';});
-    });    
-    
-    Route::middleware(['role.user'])->group(function () {
-        Route::get('/product', function () {return 'list of product';});
-    });    
-
 });
 
 require __DIR__.'/auth.php';
