@@ -20,6 +20,7 @@ class CheckRoleUser
             return $next($request);
         }
 
-        return redirect('/')->with('error','You have not admin access');
+        abort(403, 'Unauthorized');
+        // return redirect('/')->with('error','You have not admin access');
     }
 }

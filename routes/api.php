@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::get('/dashboard', function () {return 'dashboard';});
-    Route::get('/help', function () {return 'help';});
-    Route::get('/about', function () {return 'about';});
-    Route::get('/contact', function () {return 'contact';});
+    Route::get('/dashboard', function () {
+        return 'api dashboard';
+    });
+    Route::post('/auth/login', [AuthController::class, 'login']);
+    Route::post('/auth/register', [AuthController::class, 'register']);
+
+    Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::get('/users', [PostController::class, 'show'])->middleware('restrictRole:admin');
+        Route::put('/users/{id}', [PostController::class, 'update'])->middleware('restrictRole:moderator');
+    });
 });
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
