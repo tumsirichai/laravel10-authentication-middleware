@@ -16,10 +16,6 @@ class AuthController extends Controller
             'password' => 'required|confirmed'
         ]);
 
-        // Set default role to 'admin' if not provided in the request
-        // $userData = array_merge($data, ['role' => $data['role'] ?? 'admin']);
-
-        // Mass assign the validated request data to a new instance of the User model
         $user = User::create($data);
         $token = $user->createToken('my-token')->plainTextToken;
 
@@ -50,7 +46,7 @@ class AuthController extends Controller
             'token' => $token,
             'name' => $user->name,
             'Type' => 'Bearer',
-            'role' => $user->role // include user role in response
+            'role' => $user->role
         ]);
     }
     
