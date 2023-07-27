@@ -17,7 +17,9 @@ class AuthController extends Controller
         ]);
 
         $user = User::create($data);
-        $token = $user->createToken('my-token')->plainTextToken;
+
+        $expiresAt = now()->addHour();
+        $token = $user->createToken('api-token',['*'],$expiresAt)->plainTextToken;
 
         return response()->json([
             'token' =>$token,
@@ -40,7 +42,8 @@ class AuthController extends Controller
             ]);
         }
 
-        $token = $user->createToken('my-token')->plainTextToken;
+        $expiresAt = now()->addHour();
+        $token = $user->createToken('api-token',['*'],$expiresAt)->plainTextToken;
 
         return response()->json([
             'token' => $token,
@@ -48,6 +51,14 @@ class AuthController extends Controller
             'Type' => 'Bearer',
             'role' => $user->role
         ]);
+    }
+
+    public function logout(Request $request){
+        // $request->user()->token()->delete();
+        $request->user()->currentAccessToken()->delete();
+       return [
+        'message' => 'logged out'
+       ];
     }
     
 }
