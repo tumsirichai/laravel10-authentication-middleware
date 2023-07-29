@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
@@ -41,6 +42,19 @@ Route::prefix('v1')->group(function () {
         Route::post('/auth/logout', [AuthController::class, 'logout']);
         // Route::get('/users', [PostController::class, 'show'])->middleware('restrictRole:admin');
         // Route::put('/users/{id}', [PostController::class, 'update'])->middleware('restrictRole:moderator');
+    });
+
+    // - playground lab
+    Route::prefix('lab')->group(function () {
+        Route::post('/redis', function (Request $request) {
+            Redis::set($request->key, $request->value);
+        });
+        Route::get('/redis/{key}', function (Request $request) {
+            return Redis::get($request->key);
+        });
+        Route::delete('/redis/{key}', function (Request $request) {
+            Redis::del($request->key);
+        });
     });
 });
 
