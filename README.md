@@ -20,3 +20,4 @@ npm install && npm run dev # run Vite outside container
 ## Laravel Packages
 - Breeze
 - Sanctum
+- Swagger

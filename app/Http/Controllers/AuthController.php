@@ -8,7 +8,46 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
+    /**
+        * @OA\Post(
+        * path="/auth/register",
+        * operationId="Register",
+        * tags={"Authentication"},
+        * summary="User Register",
+        * description="User Register here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"name","email", "password", "password_confirmation"},
+        *               @OA\Property(property="name", type="text"),
+        *               @OA\Property(property="email", type="text"),
+        *               @OA\Property(property="password", type="password"),
+        *               @OA\Property(property="password_confirmation", type="password")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Register Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Register Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function register( Request $request){
         $data = $request->validate([
             'name' => 'required|unique:users',
@@ -27,6 +66,44 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+        * @OA\Post(
+        * path="/auth/login",
+        * operationId="authLogin",
+        * tags={"Authentication"},
+        * summary="User Login",
+        * description="Login User Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"email", "password"},
+        *               @OA\Property(property="email", type="email"),
+        *               @OA\Property(property="password", type="password")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Login Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Login Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function login(Request $request)
     {
         $fields = $request->validate([
@@ -52,9 +129,19 @@ class AuthController extends Controller
             'role' => $user->role
         ]);
     }
-
+    
+    /**
+     * @OA\Get(
+     * path="/auth/logout",
+     * operationId="authLogout",
+     * tags={"Authentication"},
+     * summary="User Logout",
+     * description="User Logout here",
+     * @OA\Response(response="200", description="Success"),
+     * security={{"bearerAuth":{}}}
+     * )
+     */
     public function logout(Request $request){
-        // $request->user()->token()->delete();
         $request->user()->currentAccessToken()->delete();
        return [
         'message' => 'logged out'
