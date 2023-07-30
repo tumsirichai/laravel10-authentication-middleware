@@ -11,7 +11,7 @@ Post CMS and Simple Authentication.
 
 ```shell
 docker-compose up -d # run docker
-docker exec -it laravel10_phpfpm bash # access to execution in container
+docker exec -it laravel10_post bash # access to execution in container
 composer install # install laravel in container
 php artisan migrate # setup database
 npm install && npm run dev # run Vite outside container
