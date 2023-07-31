@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\PostController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,28 +19,19 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::prefix('v1')->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return 'api dashboard';
-    // });
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/register', [AuthController::class, 'register']);
 
     Route::middleware(['auth:sanctum','role.admin'])->group(function () {
-        Route::get('/users', [UserController::class,'index']);
-    });    
-    // Route::middleware(['auth:sanctum','role.user'])->group(function () {
-    //     Route::get('/products', function () {
-    //         return response()->json([
-    //             '0' => ['name'=>'GAP Girls\' Femme T-Shirt','price'=> 500.00],
-    //             '1' => ['name'=>'GAP Girls\' 3-Pack Cartwheel Shorts','price'=> 5200.00],
-    //         ]);
-    //     });
-    // });    
+        Route::apiResource('/users', UserController::class);
+    });
+
+    Route::middleware(['auth:sanctum','role.user'])->group(function () {
+        Route::apiResource('/posts', PostController::class);
+    });
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/auth/logout', [AuthController::class, 'logout']);
-        // Route::get('/users', [PostController::class, 'show'])->middleware('restrictRole:admin');
-        // Route::put('/users/{id}', [PostController::class, 'update'])->middleware('restrictRole:moderator');
     });
 });
 

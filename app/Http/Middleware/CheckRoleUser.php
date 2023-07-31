@@ -16,7 +16,8 @@ class CheckRoleUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && (Auth::user()->role == 'admin' || Auth::user()->role == 'user' )) {
+        // if (Auth::user() && (Auth::user()->role == 'admin' || Auth::user()->role == 'user' )) {
+        if (Auth::user() && in_array(Auth::user()->role, ['admin','user'])) {
             return $next($request);
         }
 
