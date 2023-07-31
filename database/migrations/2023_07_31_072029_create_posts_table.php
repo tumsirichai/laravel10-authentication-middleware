@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('status',20)->default('active');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('category_id')->unsigned()->foreign('category_id')->on('post_categories')->onDelete('cascade');
+            $table->foreignId('category_id')->references('id')->on('post_categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
