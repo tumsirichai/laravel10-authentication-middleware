@@ -57,7 +57,7 @@ class AuthController extends Controller
 
         $user = User::create($data);
 
-        $expiresAt = now()->addHour();
+        $expiresAt = $this->tokenExpireIn();
         $token = $user->createToken('api-token',['*'],$expiresAt)->plainTextToken;
 
         return response()->json([
@@ -119,7 +119,7 @@ class AuthController extends Controller
             ]);
         }
 
-        $expiresAt = now()->addHour();
+        $expiresAt = $this->tokenExpireIn();
         $token = $user->createToken('api-token',['*'],$expiresAt)->plainTextToken;
 
         return response()->json([
@@ -146,6 +146,11 @@ class AuthController extends Controller
        return [
         'message' => 'logged out'
        ];
+    }
+    
+    protected function tokenExpireIn(){
+        // return $expiresAt = now()->addHour();
+        return  now()->addDay();
     }
     
 }
