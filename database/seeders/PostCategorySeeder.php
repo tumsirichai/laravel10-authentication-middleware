@@ -24,11 +24,3 @@ class PostCategorySeeder extends Seeder
         }
     }
 }
-
-
-// Column	Type	Comment
-// id	bigint(20) unsigned Auto Increment	
-// name	varchar(255)	
-// slug	varchar(255)	
-// status	varchar(20) [active]	
-// user_id	bigint(20) unsigned
