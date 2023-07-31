@@ -1,0 +1,12 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "laravel10-post",
+    "dateExported": "2023-07-31T01:39:51.123Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "URL",
+            "value": "http://localhost:8501/api/v1"
+        }
+    ]
+}

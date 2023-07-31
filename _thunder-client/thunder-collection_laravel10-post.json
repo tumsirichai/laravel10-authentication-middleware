@@ -1,0 +1,143 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "laravel10-post",
+    "dateExported": "2023-07-31T01:43:49.213Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "f2fb7e5a-5cae-4978-ad1f-d287bae6e6c6",
+            "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
+            "containerId": "",
+            "name": "/auth/register",
+            "url": "{{URL}}/auth/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-07-31T01:30:59.099Z",
+            "modified": "2023-07-31T01:40:55.500Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n\"name\":\"James sJi\",\n\"email\": \"jamiesji@gmail.com\",\n\"password\": \"123456\",\n\"password_confirmation\": \"123456\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5f67b2dc-dbdc-40e0-94db-b631cd593559",
+            "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
+            "containerId": "",
+            "name": "/auth/logout",
+            "url": "http://localhost:8501/api/v1/auth/logout",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-07-31T01:31:19.840Z",
+            "modified": "2023-07-31T01:31:19.840Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "X-BTK-APIKEY",
+                    "value": "a4a8ccddcfe879af477d420added6eb8"
+                },
+                {
+                    "name": "Content-type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "14|YozxRHTKVAiBBXVbDX0I4gyCkvJpkWz2jemWZIBt"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c50acd9c-57ad-4f01-b6f3-b0fcf6778064",
+            "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
+            "containerId": "",
+            "name": "/auth/login",
+            "url": "{{URL}}/auth/login",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-07-31T01:31:33.150Z",
+            "modified": "2023-07-31T01:42:46.994Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n\"email\": \"admin@memo8.com\",\n\"password\": \"admin@memo8.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "06df7b60-9ca4-4338-8715-b22632fcf25d",
+            "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
+            "containerId": "",
+            "name": "/users",
+            "url": "{{URL}}/users",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-07-31T01:31:11.283Z",
+            "modified": "2023-07-31T01:43:14.644Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "X-BTK-APIKEY",
+                    "value": "a4a8ccddcfe879af477d420added6eb8"
+                },
+                {
+                    "name": "Content-type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "26|LxmlULmGlST2mSId2aa7ytpieXMPwCN0U8dtNYh2x"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f80f2baa-a249-4d1a-a42d-fc3ef04c765c",
+            "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
+            "containerId": "",
+            "name": "/posts",
+            "url": "{{URL}}/posts",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-07-31T01:34:50.397Z",
+            "modified": "2023-07-31T01:43:37.045Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "X-BTK-APIKEY",
+                    "value": "a4a8ccddcfe879af477d420added6eb8"
+                },
+                {
+                    "name": "Content-type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "26|LxmlULmGlST2mSId2aa7ytpieXMPwCN0U8dtNYh2x"
+            },
+            "tests": []
+        }
+    ],
+    "settings": {
+        "envId": "2c2a630d-b1e7-487c-8daf-bb04b1a26f2b"
+    }
+}
