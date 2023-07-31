@@ -131,7 +131,7 @@ class AuthController extends Controller
     }
     
     /**
-     * @OA\Get(
+     * @OA\Post(
      * path="/auth/logout",
      * operationId="authLogout",
      * tags={"Authentication"},
