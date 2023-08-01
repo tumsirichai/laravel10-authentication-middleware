@@ -187,8 +187,7 @@ class PostController extends Controller
      *      )
      * )
      */
-    // public function update(PostUpdateRequest $request, Post $post)
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
         if (Auth::user()->id !== $post->user_id) {
             return response()->json(['error' => 'You can only edit your own posts.'], 403);
