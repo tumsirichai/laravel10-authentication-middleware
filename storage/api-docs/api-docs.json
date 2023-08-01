@@ -59,39 +59,7 @@
                 "description": "Returns post data",
                 "operationId": "storePost",
                 "requestBody": {
-                    "required": true,
                     "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "category_id",
-                                    "title",
-                                    "slug",
-                                    "detail",
-                                    "status"
-                                ],
-                                "properties": {
-                                    "category_id": {
-                                        "type": "text",
-                                        "default": "1"
-                                    },
-                                    "title": {
-                                        "type": "text"
-                                    },
-                                    "slug": {
-                                        "type": "text"
-                                    },
-                                    "detail": {
-                                        "type": "textarea"
-                                    },
-                                    "status": {
-                                        "type": "text",
-                                        "default": "active"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
                         "application/json": {
                             "schema": {}
                         }
@@ -186,7 +154,6 @@
                     }
                 ],
                 "requestBody": {
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {}
@@ -295,31 +262,6 @@
                 "operationId": "Register",
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "name",
-                                    "email",
-                                    "password",
-                                    "password_confirmation"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "text"
-                                    },
-                                    "email": {
-                                        "type": "text"
-                                    },
-                                    "password": {
-                                        "type": "password"
-                                    },
-                                    "password_confirmation": {
-                                        "type": "password"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
                         "application/json": {
                             "schema": {}
                         }
@@ -369,23 +311,6 @@
                 "operationId": "authLogin",
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "email"
-                                    },
-                                    "password": {
-                                        "type": "password"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
                         "application/json": {
                             "schema": {}
                         }

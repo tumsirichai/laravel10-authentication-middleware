@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\PostStoreRequest;
+use App\Http\Requests\Api\PostUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\PostResource;
 use App\Models\Post;
@@ -58,20 +59,7 @@ class PostController extends Controller
      *      description="Returns post data",
      *      security={{"bearerAuth":{}}},
      *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(),
-     *          @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                type="object",
-     *                required={"category_id","title","slug", "detail", "status"},
-     *                @OA\Property(property="category_id", type="text", default="1"),
-     *                @OA\Property(property="title", type="text"),
-     *                @OA\Property(property="slug", type="text"),
-     *                @OA\Property(property="detail", type="textarea"),
-     *                @OA\Property(property="status", type="text", default="active")
-     *             ),
-     *          ),
+     *          @OA\JsonContent()
      *      ),
      *      @OA\Response(
      *          response=201,
@@ -95,12 +83,12 @@ class PostController extends Controller
     public function store(PostStoreRequest $request)
     {
         $post = Post::create([
-        'user_id' => 2,
-        'title' => $request->title,
-        'category_id' => $request->category_id,
-        'slug' => $request->slug,
-        'detail' => $request->detail,
-        'status' => $request->status
+            'user_id' => Auth::user()->id,
+            'title' => $request->title,
+            'category_id' => $request->category_id,
+            'slug' => $request->slug,
+            'detail' => $request->detail,
+            'status' => $request->status
         ]);
 
         return new PostResource($post);
@@ -174,20 +162,7 @@ class PostController extends Controller
      *          )
      *      ),
      *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(),
-     *          @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                type="object",
-     *                required={"category_id","title","slug", "detail", "status"},
-     *                @OA\Property(property="category_id", type="text", default="1"),
-     *                @OA\Property(property="title", type="text"),
-     *                @OA\Property(property="slug", type="text"),
-     *                @OA\Property(property="detail", type="textarea"),
-     *                @OA\Property(property="status", type="text", default="active")
-     *             ),
-     *          ),
+     *          @OA\JsonContent()
      *      ),
      *      @OA\Response(
      *          response=202,
@@ -212,9 +187,16 @@ class PostController extends Controller
      *      )
      * )
      */
-    public function update(Request $request, string $id)
+    // public function update(PostUpdateRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
-        //
+        if (Auth::user()->id !== $post->user_id) {
+            return response()->json(['error' => 'You can only edit your own posts.'], 403);
+        }
+
+        $post->update($request->only(['title', 'category_id', 'slug', 'detail', 'status']));
+
+        return new PostResource($post);
     }
 
      /**
@@ -255,6 +237,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if (Auth::user()->id !== $post->user_id) {
+            return response()->json(['error' => 'You can only delete your own posts.'], 403);
+        }
+        
         $post->delete();
         return response()->json(null, 204);
     }
