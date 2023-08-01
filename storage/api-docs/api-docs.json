@@ -61,6 +61,37 @@
                 "requestBody": {
                     "required": true,
                     "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "category_id",
+                                    "title",
+                                    "slug",
+                                    "detail",
+                                    "status"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "type": "text",
+                                        "default": "1"
+                                    },
+                                    "title": {
+                                        "type": "text"
+                                    },
+                                    "slug": {
+                                        "type": "text"
+                                    },
+                                    "detail": {
+                                        "type": "textarea"
+                                    },
+                                    "status": {
+                                        "type": "text",
+                                        "default": "active"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
                         "application/json": {
                             "schema": {}
                         }

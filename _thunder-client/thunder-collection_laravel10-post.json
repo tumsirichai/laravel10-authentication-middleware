@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "laravel10-post",
-    "dateExported": "2023-07-31T01:43:49.213Z",
+    "dateExported": "2023-08-01T07:46:40.392Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -9,17 +9,17 @@
             "_id": "f2fb7e5a-5cae-4978-ad1f-d287bae6e6c6",
             "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
             "containerId": "",
-            "name": "/auth/register",
+            "name": "auth - register",
             "url": "{{URL}}/auth/register",
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-07-31T01:30:59.099Z",
-            "modified": "2023-07-31T01:40:55.500Z",
+            "modified": "2023-07-31T08:02:29.868Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n\"name\":\"James sJi\",\n\"email\": \"jamiesji@gmail.com\",\n\"password\": \"123456\",\n\"password_confirmation\": \"123456\"\n}",
+                "raw": "{\n\"name\":\"James Ji\",\n\"email\": \"jamji@gmail.com\",\n\"password\": \"123456\",\n\"password_confirmation\": \"123456\"\n}",
                 "form": []
             },
             "tests": []
@@ -28,7 +28,7 @@
             "_id": "5f67b2dc-dbdc-40e0-94db-b631cd593559",
             "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
             "containerId": "",
-            "name": "/auth/logout",
+            "name": "auth - logout",
             "url": "http://localhost:8501/api/v1/auth/logout",
             "method": "POST",
             "sortNum": 40000,
@@ -59,17 +59,17 @@
             "_id": "c50acd9c-57ad-4f01-b6f3-b0fcf6778064",
             "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
             "containerId": "",
-            "name": "/auth/login",
+            "name": "auth - login",
             "url": "{{URL}}/auth/login",
             "method": "POST",
             "sortNum": 50000,
             "created": "2023-07-31T01:31:33.150Z",
-            "modified": "2023-07-31T01:42:46.994Z",
+            "modified": "2023-07-31T14:24:03.580Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n\"email\": \"admin@memo8.com\",\n\"password\": \"admin@memo8.com\"\n}",
+                "raw": "{\n\"email\": \"wlfNNSf4ZD@gmail.com\",\n\"password\": \"111111\"\n}",
                 "form": []
             },
             "tests": []
@@ -78,7 +78,7 @@
             "_id": "06df7b60-9ca4-4338-8715-b22632fcf25d",
             "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
             "containerId": "",
-            "name": "/users",
+            "name": "users - list",
             "url": "{{URL}}/users",
             "method": "GET",
             "sortNum": 60000,
@@ -109,12 +109,49 @@
             "_id": "f80f2baa-a249-4d1a-a42d-fc3ef04c765c",
             "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
             "containerId": "",
-            "name": "/posts",
-            "url": "{{URL}}/posts",
+            "name": "posts - list",
+            "url": "{{URL}}/posts?page=1",
             "method": "GET",
             "sortNum": 70000,
             "created": "2023-07-31T01:34:50.397Z",
-            "modified": "2023-07-31T01:43:37.045Z",
+            "modified": "2023-07-31T15:04:42.693Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "X-BTK-APIKEY",
+                    "value": "a4a8ccddcfe879af477d420added6eb8"
+                },
+                {
+                    "name": "Content-type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "1|PXT4djTEhq1ItZqwpC7pAh0cbMR1Sh2CIGUTWMd3"
+            },
+            "tests": []
+        },
+        {
+            "_id": "4555cc11-bb6b-4773-9194-d88ad37a4ca9",
+            "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
+            "containerId": "",
+            "name": "posts - create",
+            "url": "{{URL}}/posts",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-08-01T07:42:14.509Z",
+            "modified": "2023-08-01T07:42:40.081Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -132,7 +169,7 @@
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "26|LxmlULmGlST2mSId2aa7ytpieXMPwCN0U8dtNYh2x"
+                "bearer": "2|ktUKr18BW34MX4spvYP1kqETnYLxCJ4epL6heEfw"
             },
             "tests": []
         }

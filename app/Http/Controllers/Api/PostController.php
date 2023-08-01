@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use App\Http\Requests\Api\PostStoreRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -57,7 +59,19 @@ class PostController extends Controller
      *      security={{"bearerAuth":{}}},
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                type="object",
+     *                required={"category_id","title","slug", "detail", "status"},
+     *                @OA\Property(property="category_id", type="text", default="1"),
+     *                @OA\Property(property="title", type="text"),
+     *                @OA\Property(property="slug", type="text"),
+     *                @OA\Property(property="detail", type="textarea"),
+     *                @OA\Property(property="status", type="text", default="active")
+     *             ),
+     *          ),
      *      ),
      *      @OA\Response(
      *          response=201,
@@ -78,10 +92,20 @@ class PostController extends Controller
      *      )
      * )
      */
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        //
+        $post = Post::create([
+        'user_id' => 2,
+        'title' => $request->title,
+        'category_id' => $request->category_id,
+        'slug' => $request->slug,
+        'detail' => $request->detail,
+        'status' => $request->status
+        ]);
+
+        return new PostResource($post);
     }
+
 
     /**
      * @OA\Get(
