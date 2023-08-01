@@ -175,7 +175,19 @@ class PostController extends Controller
      *      ),
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                type="object",
+     *                required={"category_id","title","slug", "detail", "status"},
+     *                @OA\Property(property="category_id", type="text", default="1"),
+     *                @OA\Property(property="title", type="text"),
+     *                @OA\Property(property="slug", type="text"),
+     *                @OA\Property(property="detail", type="textarea"),
+     *                @OA\Property(property="status", type="text", default="active")
+     *             ),
+     *          ),
      *      ),
      *      @OA\Response(
      *          response=202,
