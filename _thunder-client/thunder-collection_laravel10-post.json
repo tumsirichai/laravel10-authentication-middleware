@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "laravel10-post",
-    "dateExported": "2023-08-01T07:46:40.392Z",
+    "dateExported": "2023-08-01T16:08:10.492Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -151,7 +151,79 @@
             "method": "POST",
             "sortNum": 80000,
             "created": "2023-08-01T07:42:14.509Z",
-            "modified": "2023-08-01T07:42:40.081Z",
+            "modified": "2023-08-01T15:58:46.784Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "X-BTK-APIKEY",
+                    "value": "a4a8ccddcfe879af477d420added6eb8"
+                },
+                {
+                    "name": "Content-type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"category_id\":2,\n  \"title\":\"xdxffdfdg\",\n  \"slug\":\"xdxffdfdg\",\n  \"detail\":\"xdxffdfdg\",\n  \"status\":\"active\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "10|5lYe9NxZmzdGVpdZmyORuOgHiv16W3s7lQQTmi9r"
+            },
+            "tests": []
+        },
+        {
+            "_id": "56a23211-ba6b-46a4-836e-37809dc181ea",
+            "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
+            "containerId": "",
+            "name": "posts - update",
+            "url": "{{URL}}/posts/39",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2023-08-01T15:27:00.671Z",
+            "modified": "2023-08-01T15:40:04.491Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "application/json"
+                },
+                {
+                    "name": "X-BTK-APIKEY",
+                    "value": "a4a8ccddcfe879af477d420added6eb8"
+                },
+                {
+                    "name": "Content-type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"category_id\":2,\n  \"title\":\"7|05eZajFsxq032wGFXYzkqE1FR8ZJ1DbiNReFFnRN is not supported xdxffdsddsfsdfdsfdg--\",\n  \"slug\":\"method is not supported xdxffdfdg\",\n  \"detail\":\"method is not supported method is not supported method is not supported method is not supported xdxffdfdg\",\n  \"status\":\"active\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "7|05eZajFsxq032wGFXYzkqE1FR8ZJ1DbiNReFFnRN"
+            },
+            "tests": []
+        },
+        {
+            "_id": "803f3ba5-c57e-4190-9edd-a41f40f3d2ab",
+            "colId": "e5e26993-98c6-4399-9153-7d61408f3e55",
+            "containerId": "",
+            "name": "posts - delete",
+            "url": "{{URL}}/posts/36",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2023-08-01T16:03:26.008Z",
+            "modified": "2023-08-01T16:05:46.653Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -169,7 +241,7 @@
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "2|ktUKr18BW34MX4spvYP1kqETnYLxCJ4epL6heEfw"
+                "bearer": "7|05eZajFsxq032wGFXYzkqE1FR8ZJ1DbiNReFFnRN"
             },
             "tests": []
         }
