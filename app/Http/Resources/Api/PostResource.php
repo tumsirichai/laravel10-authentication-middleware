@@ -18,6 +18,8 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'category_id' => $this->category_id,
+            'category' => $this->category->name,
+            'category_slug' => $this->category->slug,
             'slug' => $this->slug,
             'image' => $this->image,
             'updated_at' => $this->updated_at
