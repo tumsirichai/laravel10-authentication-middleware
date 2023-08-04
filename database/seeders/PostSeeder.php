@@ -14,12 +14,12 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 5000; $i++) { 
             DB::table('posts')->insert([
-            'title' => Str::random(80),
-            'slug' => Str::random(10).'-'.Str::random(10).'example-'.Str::random(10),
-            'detail' => 'Ullamco incididunt officia ea consectetur et elit Lorem qui proident. Fugiat cillum aute laborum dolor aliquip enim minim culpa anim veniam in do irure occaecat. Velit et pariatur est tempor et exercitation veniam consequat.'.Str::random(1000),
-            'image' => Str::random(10).'.jpg',
+            'title' => Str::random(50),
+            'slug' => Str::random(3).'-'.Str::random(3).'example-'.Str::random(3),
+            'detail' => Str::random(1000),
+            'image' => Str::random(15).'.jpg',
             'user_id' => rand(1,5),
             'category_id' => rand(1,5),
             'status' => 'active',

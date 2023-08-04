@@ -43,14 +43,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * @OA\Post(
      *      path="/posts",
      *      operationId="storePost",
@@ -82,16 +74,22 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-        $post = Post::create([
-            'user_id' => Auth::user()->id,
-            'title' => $request->title,
-            'category_id' => $request->category_id,
-            'slug' => $request->slug,
-            'detail' => $request->detail,
-            'status' => $request->status
-        ]);
+        if(!$request->hasFile('images')) {
+            return response()->json([$request->hasFile('images')], 200);
+        }else{
+            return response()->json(['upload_file_not_found'], 400);
+        }
 
-        return new PostResource($post);
+        // $post = Post::create([
+        //     'user_id' => Auth::user()->id,
+        //     'title' => $request->title,
+        //     'category_id' => $request->category_id,
+        //     'slug' => $request->slug,
+        //     'detail' => $request->detail,
+        //     'status' => $request->status
+        // ]);
+
+        // return new PostResource($post);
     }
 
 
@@ -132,14 +130,6 @@ class PostController extends Controller
      * )
      */
     public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
         //
     }

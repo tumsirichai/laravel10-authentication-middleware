@@ -18,7 +18,7 @@ class PostCategorySeeder extends Seeder
             DB::table('post_categories')->insert([
                 'name' => Str::random(10),
                 'slug' => Str::random(5).'-'.Str::random(3).'example-'.Str::random(5),
-                'user_id' => rand(1,5),
+                'user_id' => rand(1,10),
                 'status' => 'active'
             ]);
         }
