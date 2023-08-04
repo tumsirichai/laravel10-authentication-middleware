@@ -6,8 +6,12 @@ use App\Http\Requests\Api\PostUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\PostResource;
 use App\Models\Post;
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Cloudinary;
+use Cloudinary\Configuration\Configuration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -72,10 +76,19 @@ class PostController extends Controller
      *      )
      * )
      */
-    public function store(PostStoreRequest $request)
+    // public function store(PostStoreRequest $request)
+    public function store(Request $request)
     {
-        if(!$request->hasFile('images')) {
-            return response()->json([$request->hasFile('images')], 200);
+        if($request->hasFile('image')) {
+            $config = new Configuration();
+            $config->cloud->cloudName = env('CLOUDINARY_NAME', '');
+            $config->cloud->apiKey = env('CLOUDINARY_API_KEY', '');
+            $config->cloud->apiSecret = env('CLOUDINARY_API_SECRET', '');
+            $config->url->secure = true;
+            $cloudinary = new Cloudinary($config);
+            $uploadedFileUrl = $cloudinary->uploadApi()->Upload($request->file('image')->getRealPath());
+            
+            return response()->json([$uploadedFileUrl['secure_url']], 200);
         }else{
             return response()->json(['upload_file_not_found'], 400);
         }

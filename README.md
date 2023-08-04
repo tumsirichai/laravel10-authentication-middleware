@@ -22,3 +22,8 @@ npm install && npm run dev # run Vite outside container
 - Breeze
 - Sanctum
 - Swagger
+
+### cloudinary
+https://github.com/cloudinary-devs/cloudinary-laravel
+- cloudinary-labs/cloudinary-laravel
+- cloudinary/cloudinary_php
