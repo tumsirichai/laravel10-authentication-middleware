@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    protected $uploadPath = 'uploads/post';
     /**
      * @OA\Get(
      *      path="/posts",
@@ -83,7 +84,7 @@ class PostController extends Controller
         $imageName = '';
         if($request->hasFile('image')) {
             $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+            $request->image->move(public_path($this->uploadPath), $imageName);
         }
 
         $post = Post::create([
@@ -193,17 +194,6 @@ class PostController extends Controller
 
         $post->update($request->only(['title', 'category_id', 'slug', 'detail', 'status']));
 
-        if($request->hasFile('image')) {
-            if ($post->image) {
-                Storage::delete('public/images/' . $post->image);
-            }
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-        }else{
-            $imageName = $post->image;
-        }
-        $post->update(['image' => $imageName]);
-
         return new PostResource($post);
     }
 
@@ -261,10 +251,10 @@ class PostController extends Controller
 
         if($request->hasFile('image')) {
             if ($post->image) {
-                Storage::delete('public/images/' . $post->image);
+                Storage::delete(public_path($this->uploadPath) . $post->image);
             }
             $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
+            $request->image->move(public_path($this->uploadPath), $imageName);
         }else{
             $imageName = $post->image;
         }

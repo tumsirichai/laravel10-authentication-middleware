@@ -19,6 +19,7 @@ yarn-error.log
 /.vscode
 
 # my custom
+/public/uploads
 /public/content
 /storage/content
 /db
