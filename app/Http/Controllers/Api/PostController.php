@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\PostStoreRequest;
 use App\Http\Requests\Api\PostUpdateRequest;
+use App\Http\Requests\Api\PostStoreMediaRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\PostResource;
 use App\Models\Post;
-use Cloudinary\Api\Upload\UploadApi;
-use Cloudinary\Cloudinary;
-use Cloudinary\Configuration\Configuration;
+// use Cloudinary\Api\Upload\UploadApi;
+// use Cloudinary\Cloudinary;
+// use Cloudinary\Configuration\Configuration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostController extends Controller
@@ -76,33 +78,25 @@ class PostController extends Controller
      *      )
      * )
      */
-    // public function store(PostStoreRequest $request)
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
+        $imageName = '';
         if($request->hasFile('image')) {
-            $config = new Configuration();
-            $config->cloud->cloudName = env('CLOUDINARY_NAME', '');
-            $config->cloud->apiKey = env('CLOUDINARY_API_KEY', '');
-            $config->cloud->apiSecret = env('CLOUDINARY_API_SECRET', '');
-            $config->url->secure = true;
-            $cloudinary = new Cloudinary($config);
-            $uploadedFileUrl = $cloudinary->uploadApi()->Upload($request->file('image')->getRealPath());
-            
-            return response()->json([$uploadedFileUrl['secure_url']], 200);
-        }else{
-            return response()->json(['upload_file_not_found'], 400);
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
         }
 
-        // $post = Post::create([
-        //     'user_id' => Auth::user()->id,
-        //     'title' => $request->title,
-        //     'category_id' => $request->category_id,
-        //     'slug' => $request->slug,
-        //     'detail' => $request->detail,
-        //     'status' => $request->status
-        // ]);
+        $post = Post::create([
+            'user_id' => Auth::user()->id,
+            'title' => $request->title,
+            'image' => $imageName,
+            'category_id' => $request->category_id,
+            'slug' => $request->slug,
+            'detail' => $request->detail,
+            'status' => $request->status
+        ]);
 
-        // return new PostResource($post);
+        return new PostResource($post);
     }
 
 
@@ -192,11 +186,23 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, Post $post)
     {
+
         if (Auth::user()->id !== $post->user_id) {
             return response()->json(['error' => 'You can only edit your own posts.'], 403);
         }
 
         $post->update($request->only(['title', 'category_id', 'slug', 'detail', 'status']));
+
+        if($request->hasFile('image')) {
+            if ($post->image) {
+                Storage::delete('public/images/' . $post->image);
+            }
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+        }else{
+            $imageName = $post->image;
+        }
+        $post->update(['image' => $imageName]);
 
         return new PostResource($post);
     }
@@ -245,5 +251,25 @@ class PostController extends Controller
         
         $post->delete();
         return response()->json(null, 204);
+    }
+
+    public function storeMedia(PostStoreMediaRequest $request, Post $post)
+    {
+        if (Auth::user()->id !== $post->user_id) {
+            return response()->json(['error' => 'You can only upload your own posts.'], 403);
+        }
+
+        if($request->hasFile('image')) {
+            if ($post->image) {
+                Storage::delete('public/images/' . $post->image);
+            }
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+        }else{
+            $imageName = $post->image;
+        }
+        $post->update(['image' => $imageName]);
+
+        return new PostResource($post);
     }
 }

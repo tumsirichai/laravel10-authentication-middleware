@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Post extends Model
 {
     use HasFactory, HasApiTokens;
-    protected $fillable = ['title','category_id', 'slug', 'detail', 'status', 'user_id'];
+    protected $fillable = ['id', 'user_id', 'title', 'category_id', 'slug', 'detail', 'image', 'status'];
 
     public function category()
     {

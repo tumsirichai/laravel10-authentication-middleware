@@ -28,7 +28,7 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware(['auth:sanctum','role.user'])->group(function () {
         Route::apiResource('/posts', PostController::class);
-        // Route::put('/posts/{id}', [PostController::class, 'update']);
+        Route::post('/posts/{post}/upload', [PostController::class, 'storeMedia']);
     });
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
