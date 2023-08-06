@@ -21,6 +21,5 @@ class CheckRoleUser
         }
 
         abort(403, 'Unauthorized');
-        // return redirect('/')->with('error','You have not admin access');
     }
 }
