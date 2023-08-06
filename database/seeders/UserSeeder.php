@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 50; $i++) { 
             DB::table('users')->insert([
                 'name' => Str::random(10),
                 'role' => 'admin',

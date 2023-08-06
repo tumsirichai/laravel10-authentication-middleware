@@ -14,7 +14,7 @@ class PostCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 10; $i++) { 
             DB::table('post_categories')->insert([
                 'name' => Str::random(10),
                 'slug' => Str::random(5).'-'.Str::random(3).'example-'.Str::random(5),
